@@ -12,6 +12,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>coffee-shop-root</name>
 	<modules>
+		<module>common</module>
+		<module>coffee-shop</module>
 		<module>coffee-shop-customer</module>
 	</modules>
 	<packaging>pom</packaging>
@@ -23,6 +25,7 @@
 		<maven.compiler.target>17</maven.compiler.target>
 		<spring-boot.version>3.2.0</spring-boot.version>
 		<liquibase.version>4.24.0</liquibase.version>
+		<redisson.version>3.27.2</redisson.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -30,6 +33,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
 				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.redisson</groupId>
+				<artifactId>redisson-parent</artifactId>
+				<version>${redisson.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -45,6 +55,11 @@
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-webflux</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-security</artifactId>
 				<version>${spring-boot.version}</version>
 			</dependency>
@@ -54,6 +69,11 @@
 				<version>${spring-boot.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>org.redisson</groupId>
+				<artifactId>redisson</artifactId>
+				<version>${redisson.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.postgresql</groupId>
 				<artifactId>postgresql</artifactId>
