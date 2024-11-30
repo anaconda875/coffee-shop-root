@@ -12,7 +12,8 @@ This is a multi-modules Maven project, aim to address the requirements described
 
 ## How to run:
 1. Clone the repository
-2. `docker-compose up --build`
+2. `mvn clean package`
+3. `docker-compose up --build`
 
 ## Structure
 The project has 3 modules, each address particular requirements.
