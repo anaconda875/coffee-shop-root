@@ -1,10 +1,39 @@
 spring:
   application:
     name: coffee-shop
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   datasource:
-    url: jdbc:postgresql://localhost:5432/test
+    url: jdbc:postgresql://localhost:5432/cf_db
     username: postgres
     password: root
+  liquibase:
+    change-log: classpath:/db/changelog-master.xml
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+      ddl-auto: none
+    properties:
+      hibernate:
+        connection:
+          pool_size: 10
+        enhancer:
+          enableAssociationManagement: false
+          enableDirtyTracking: false
+          enableLazyInitialization: false
+        jdbc:
+          batch_size: 3
+        show_sql: true
+        format_sql: true
+        highlight_sql: true
+
+      jakarta:
+        persistence:
+          jdbc:
+            password: root
+            url: jdbc:postgresql://localhost:5432/cf_db
+            user: postgres
 
 app:
   root-path: /apis/v1

@@ -24,8 +24,12 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<spring-boot.version>3.2.0</spring-boot.version>
+		<hibernate.version>6.4.4.Final</hibernate.version>
+		<reactive-hibernate-spring-boot-starter.version>1.1.1</reactive-hibernate-spring-boot-starter.version>
 		<liquibase.version>4.24.0</liquibase.version>
 		<redisson.version>3.27.2</redisson.version>
+		<vertx-pg-client.version>4.5.8</vertx-pg-client.version>
+		<scram-client.version>2.1</scram-client.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -68,6 +72,27 @@
 				<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
 				<version>${spring-boot.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>io.github.anaconda875</groupId>
+				<artifactId>reactive-hibernate-spring-boot-starter</artifactId>
+				<version>${reactive-hibernate-spring-boot-starter.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate.orm</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernate.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-core</artifactId>
+				<version>${liquibase.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.zaxxer</groupId>
+				<artifactId>HikariCP</artifactId>
+				<version>${hikaricp.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.redisson</groupId>
@@ -80,6 +105,18 @@
 				<version>${postgresql.version}</version>
 				<scope>runtime</scope>
 			</dependency>
+			<dependency>
+				<groupId>io.vertx</groupId>
+				<artifactId>vertx-pg-client</artifactId>
+				<version>${vertx-pg-client.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.ongres.scram</groupId>
+				<artifactId>client</artifactId>
+				<version>${scram-client.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-core</artifactId>

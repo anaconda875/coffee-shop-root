@@ -3,7 +3,7 @@ package org.example.coffeeshop.config;
 import java.io.IOException;
 
 import org.redisson.Redisson;
-import org.redisson.api.RedissonClient;
+import org.redisson.api.RedissonReactiveClient;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -20,10 +20,10 @@ public class RedisConfig {
 	}
 
 	@Bean
-	RedissonClient redissonClient() throws IOException {
+	RedissonReactiveClient redissonClient() throws IOException {
 		Config config = Config.fromYAML( redissonConfig.getURL() );
 
-		return Redisson.create(config);
+		return Redisson.create(config).reactive();
 	}
 
 }

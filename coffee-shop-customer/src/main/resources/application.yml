@@ -2,25 +2,8 @@ spring:
   application:
     name: coffee-shop-customer
 
-  datasource:
-    url: jdbc:postgresql://localhost:5432/test
-    username: postgres
-    password: root
-
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: none
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          jwk-set-uri: http://localhost:9990/realms/coffee-shop-root/protocol/openid-connect/certs
-
 app:
   root-path: /apis/v1
-  security:
-    oauth2:
-      client-id: id
-  tenant:
-    default: '00000000-0000-0000-0000-000000000000'
+  shop-base-uri: http://localhost:8080/apis/v1/shop/orders
+server:
+  port: 8081

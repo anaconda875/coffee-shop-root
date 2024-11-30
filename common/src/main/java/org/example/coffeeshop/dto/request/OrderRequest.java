@@ -12,7 +12,7 @@ public class OrderRequest {
 	/**
 	 * Which user is ordering
 	 */
-	private String from;
+	private UUID from;
 
 	/**
 	 * Which item is being bought

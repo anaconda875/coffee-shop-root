@@ -13,7 +13,7 @@ import org.example.coffeeshop.dto.request.OrderRequest;
 public class OrderResponse {
 
 	private UUID id;
-	private String of;
+	private UUID of;
 	private Long itemId;
 	private Integer quantity;
 	private Integer pos;

@@ -1,4 +1,4 @@
-package com.example.coffeeshop;
+package org.example.coffeeshop;
 
 import org.springframework.boot.test.context.SpringBootTest;
 

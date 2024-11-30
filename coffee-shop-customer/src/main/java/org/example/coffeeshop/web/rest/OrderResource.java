@@ -1,7 +1,5 @@
 package org.example.coffeeshop.web.rest;
 
-import java.util.UUID;
-
 import lombok.RequiredArgsConstructor;
 import org.example.coffeeshop.dto.request.OrderRequest;
 import org.example.coffeeshop.dto.response.OrderResponse;
@@ -11,23 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("#{appProperties.rootPath}/shop/orders")
+@RequestMapping("${app.root-path}/orders")
 @RequiredArgsConstructor
 public class OrderResource {
 
 	private final OrderService orderService;
 
 	@PostMapping
-	Mono<OrderResponse> order(@RequestBody OrderRequest orderRequest) {
-		return orderService.onOrder( orderRequest );
-	}
-
-	@PostMapping("/{id}/cancellation")
-	Mono<Void> cancel(@PathVariable UUID id) {
-		return orderService.onCancel( id );
+	OrderResponse order(@RequestBody OrderRequest orderRequest) {
+		return orderService.order( orderRequest );
 	}
 
 }
