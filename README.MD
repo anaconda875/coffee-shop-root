@@ -9,6 +9,7 @@ This is a multi-modules Maven project, aim to address the requirements described
 5. Migration: Liquibase
 6. [Autoconfig for Liquibase](coffee-shop/src/main/java/org/example/coffeeshop/liquibase/LiquibaseAutoConfiguration.java)
 7. Testing: Jmeter
+8. Designing: UML
 
 ## How to run:
 1. Clone the repository
