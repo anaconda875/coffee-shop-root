@@ -15,6 +15,10 @@ This is a multi-modules Maven project, aim to address the requirements described
 2. `mvn clean package`
 3. `docker-compose up --build`
 
+## Swagger:
+1. Customer app: [http://35.208.232.1:8081/swagger-ui/index.html](http://35.208.232.1:8081/swagger-ui/index.html)
+2. Shop app: [http://35.208.232.1:8080/v3/webjars/swagger-ui/index.html](http://35.208.232.1:8080/v3/webjars/swagger-ui/index.html)
+
 ## Structure
 The project has 3 modules, each address particular requirements.
 1. `org.example.common`: Contains common things like `DTO`, which are used in other modules
