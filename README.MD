@@ -3,7 +3,7 @@ This is a multi-modules Maven project, aim to address the requirements described
 
 ## Technical things in this project:
 1. RESTful: naming convention
-2. Spring: Include Spring Boot, Spring Web, Spring WebFlux, Spring Doc **[Reactive Hibernate Spring Boot Starter](https://github.com/anaconda875/reactive-hibernate-spring-boot-starter) (my library that integrate Reactive hHibernate with Spring Data)**
+2. Spring: Include Spring Boot, Spring Web, Spring WebFlux, Spring Doc, **[Reactive Hibernate Spring Boot Starter](https://github.com/anaconda875/reactive-hibernate-spring-boot-starter) (my library that integrate Reactive hHibernate with Spring Data)**
 3. Storage: Hibernate/JPA, PostgreSQL (locking), Redis
 4. Auth: Oauth2/Keycloak
 5. Migration: Liquibase
@@ -27,10 +27,11 @@ I make use of Spring Webflux and **[Reactive Hibernate Spring Boot Starter](http
 , which is created by me, to build up the APIs.
 Although the Deliverable doesn't require to implement this module, but in my point of view,
 the coffee-shop should be the place in which we put the logic to, as it serve the business of the shops.
-<span style="color:red">**AND, BELIEVE ME, YOU NEED TO TAKE A LOOK AT [THIS MODULE](./coffee-shop)**.</span>
+
+    <span style="color:red">**AND, BELIEVE ME, YOU NEED TO TAKE A LOOK AT [THIS MODULE](./coffee-shop)**.</span>
 3. `org.example.coffee-shop-customer`: The main module that solves Part 2 of the requirements.
 It requires some APIs from the `org.example.coffee-shop`.
-4. 
+
 ## Design (based on Deliverables Part 1)
 ### I. Allows the customer to register with their mobile number, name and regular address (home or work)
 Although this requirement is on `coffee-shop-customer`, but think further, `coffee-shop` also has to provide `User Management/Security` feature.
