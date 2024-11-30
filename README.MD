@@ -1,5 +1,6 @@
 # About the project
 This is a multi-modules Maven project, aim to address the requirements described for the Customer App.
+![code](./images/code.png)
 
 ## Technical things in this project:
 1. RESTful: naming convention
