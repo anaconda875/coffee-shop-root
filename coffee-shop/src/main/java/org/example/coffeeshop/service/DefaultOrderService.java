@@ -90,35 +90,6 @@ public class DefaultOrderService implements OrderService {
 						return Mono.error( () -> new OrderException( "Could not make an order for " + orderRequest ) );
 					}
 				} );
-
-		/*RDeque<OrderRequest> minQueue = queues.stream()
-				.map( queue -> new AbstractMap.SimpleImmutableEntry<>( client.<OrderRequest>getDeque( shopId + SEPARATOR + queue ), queue ) )
-				.reduce( (f, l) -> {
-					if ( f.getKey().size() <= l.getKey().size() ) {
-						queueName.set( f.getValue() );
-						return f;
-					}
-
-					queueName.set( l.getValue() );
-					return l;
-				} )
-				.map( Map.Entry::getKey)
-				.orElseThrow( QueueNotAvailableException::new );
-
-		try {
-			//Redis is single threaded, so the last position returned by addLast
-			//is actually the position of the user in the queue
-			UUID id = UUID.randomUUID();
-			orderRequest.setId( id );
-			int pos = minQueue.addLast( new OrderRequest[] { orderRequest } );
-			OrderResponse response = OrderResponse.of( orderRequest, pos );
-			//store which order belongs to which queue
-			client.getMap( shopId ).put( id.toString(), new OrderInfo(queueName.get(), orderRequest) );
-
-			return response;
-		} catch (Exception e) {
-			throw new BookingException( "Could not make an order for " + orderRequest );
-		}*/
 	}
 
 	@Override
@@ -135,16 +106,6 @@ public class DefaultOrderService implements OrderService {
 					return Mono.zip( removed1, removed2, removed3 );
 				} )
 				.then();
-
-
-//		OrderInfo orderInfo = client.<String, OrderInfo>getMap( shopId ).get( id.toString() );
-//		if(orderInfo == null) {
-//			throw new ResourceNotFoundException();
-//		}
-//
-//		client.<OrderRequest>getDeque( shopId + SEPARATOR + orderInfo.getQueueName() ).remove(orderInfo.getRequest());
-//		client.getMap( shopId ).remove( id.toString() );
-//		return null;
 	}
 
 	@Data
