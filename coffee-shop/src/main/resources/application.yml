@@ -42,3 +42,9 @@ app:
     - bda05e7d-65c5-4988-b0b3-d70f261227cb
     - 8742faff-83d2-4c1c-a423-e2f4dfd8ae8b
 #    - ecf82964-b501-4885-8c4a-0d781b169199
+
+springdoc:
+  api-docs:
+    path: /v3/swagger-ui.html
+  swagger-ui:
+    path: /v3/api-docs
