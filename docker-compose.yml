@@ -1,0 +1,55 @@
+version: '3'
+
+networks:
+  shop_network:
+    driver: bridge
+
+services:
+  redis:
+    image: bitnami/redis:6.2.7
+    container_name: redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - shop_network
+
+  pg_db:
+    image: postgres:15-bookworm
+    container_name: pg_db
+    networks:
+      - shop_network
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=cf_db
+
+  coffee_shop:
+    image: coffee-shop:latest
+    build:
+      context: ./coffee-shop
+    container_name: coffee-shop
+    networks:
+      - shop_network
+    depends_on:
+      - pg_db
+      - redis
+    ports:
+      - '8080:8080'
+      - '50000:50000'
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://pg_db:5432/cf_db
+      SPRING_JPA_PROPERTIES_JAKARTA_PERSISTENCE_JDBC_URL: jdbc:postgresql://pg_db:5432/cf_db
+
+  coffee_shop_customer:
+    image: coffee-shop-customer:latest
+    build:
+      context: ./coffee-shop-customer
+    container_name: coffee-shop-customer
+    networks:
+      - shop_network
+    ports:
+      - '8081:8081'
+    depends_on:
+      - coffee_shop
+    environment:
+      APP_SHOPBASEURI: http://coffee_shop:8080/apis/v1/shop/orders
