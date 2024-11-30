@@ -3,7 +3,7 @@ This is a multi-modules Maven project, aim to address the requirements described
 ![code](./images/code.png)
 
 ## Technical things in this project:
-1. RESTful: naming convention
+1. RESTFul: naming convention
 2. Spring: Include Spring Boot, Spring Web, Spring WebFlux, Spring Doc, **[Reactive Hibernate Spring Boot Starter](https://github.com/anaconda875/reactive-hibernate-spring-boot-starter) (my library that integrate Reactive hHibernate with Spring Data)**
 3. Storage: Hibernate/JPA, PostgreSQL (locking), Redis
 4. Auth: Oauth2/Keycloak
