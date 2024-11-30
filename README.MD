@@ -11,6 +11,7 @@ This is a multi-modules Maven project, aim to address the requirements described
 6. [Autoconfig for Liquibase](coffee-shop/src/main/java/org/example/coffeeshop/liquibase/LiquibaseAutoConfiguration.java)
 7. Testing: Jmeter
 8. Designing: UML
+9. Deployment: docker, docker compose
 
 ## How to run:
 1. Clone the repository
