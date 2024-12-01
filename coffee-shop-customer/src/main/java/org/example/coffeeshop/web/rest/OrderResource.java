@@ -1,5 +1,6 @@
 package org.example.coffeeshop.web.rest;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.coffeeshop.dto.request.OrderRequest;
 import org.example.coffeeshop.dto.response.OrderResponse;
@@ -18,7 +19,7 @@ public class OrderResource {
 	private final OrderService orderService;
 
 	@PostMapping
-	OrderResponse order(@RequestBody OrderRequest orderRequest) {
+	OrderResponse order(@Valid @RequestBody OrderRequest orderRequest) {
 		return orderService.order( orderRequest );
 	}
 

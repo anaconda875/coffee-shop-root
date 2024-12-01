@@ -2,6 +2,7 @@ package org.example.coffeeshop.web.rest;
 
 import java.util.UUID;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.coffeeshop.dto.request.OrderRequest;
 import org.example.coffeeshop.dto.response.OrderResponse;
@@ -21,7 +22,7 @@ public class OrderResource {
 	private final OrderService orderService;
 
 	@PostMapping
-	Mono<OrderResponse> order(@RequestBody OrderRequest orderRequest) {
+	Mono<OrderResponse> order(@Valid @RequestBody OrderRequest orderRequest) {
 		return orderService.onOrder( orderRequest );
 	}
 

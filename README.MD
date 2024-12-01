@@ -4,11 +4,14 @@ This is a multi-modules Maven project, aim to address the requirements described
 
 ## Technical things in this project:
 1. RESTFul: naming convention
-2. Spring: Include Spring Boot, Spring Web, Spring WebFlux, Spring Doc, **[Reactive Hibernate Spring Boot Starter](https://github.com/anaconda875/reactive-hibernate-spring-boot-starter) (my library that integrate Reactive Hibernate with Spring Data)**
+2. Spring: Include Spring Boot, Spring Web, Spring WebFlux,
+**[Reactive Hibernate Spring Boot Starter](https://github.com/anaconda875/reactive-hibernate-spring-boot-starter)
+(my library that integrate [Hibernate Reactive](https://github.com/hibernate/hibernate-reactive) to Spring Data)**,
+ Spring Doc, Spring Validation
 3. Storage: Hibernate/JPA, PostgreSQL (locking), Redis
 4. Auth: Oauth2/Keycloak
 5. Migration: Liquibase
-6. [Autoconfig for Liquibase](coffee-shop/src/main/java/org/example/coffeeshop/liquibase/LiquibaseAutoConfiguration.java)
+6. [Autoconfig for Reactive-based Liquibase](coffee-shop/src/main/java/org/example/coffeeshop/liquibase/LiquibaseAutoConfiguration.java)
 7. Testing: Jmeter
 8. Designing: UML
 9. Deployment: docker, docker compose
@@ -61,7 +64,7 @@ This is the main feature of ours apps. It must work correctly in concurrent situ
 We have some options for this case:
 1. Using `Optimistic Locking` supported by Hibernate/JPA:
 
-- The table `order` will have a Integer field annotated by `@Version`.
+- The table `order` will have an Integer field annotated by `@Version`.
 - Whenever a transaction want to commit an order, the application compares the `entity version` with the `in-DB version`.
 If they do not match, mean there is/are other transaction(s) committed before, so the version get increased.
 In this case, an Exception will be thrown.
@@ -72,7 +75,9 @@ If they match, mean is no other transaction committed before. The current transa
 Since Redis is single threaded, there is no multiple write at a particular timestamp, so concurrent issue is not happened.
 We can use `Redis List`, which is backed by `Redisson Queue` to store the orders. First in first out!
 
-In the scope of this assessment, I use `Option 2` (detail [HERE](/coffee-shop/src/main/java/org/example/coffeeshop/service/DefaultOrderService.java))
+In the scope of this assessment, I use `Option 2`. Basically, there is an `application.yml`
+in `org.example.coffee-shop` where I set the queue id(s). For now there are 2 queues.
+orders will be distributed fairly to the queues (detail [HERE](/coffee-shop/src/main/java/org/example/coffeeshop/service/DefaultOrderService.java)).
 ![https://plantuml.github.io/plantuml-core/raw.html?ZLB9JiCm4BtdAnuzWKGZiQC8LK8Wf4f854fllRZ9jF71Tl02uk-n7P9cwQ4NonwFtp9-9xOaGH1CcwHYslASLqnQh0pfNk796Qi4wSUgEbXVbgeQtdrGmVkm2sLscfRlhqd2Sik_cQMQAYoOpheq6IvIBDr6S8l9cov8JvA2-i_QKrTUPz-5_5UOuTB3aYmGCQ7fov6nNUWksAZO61sS3n5TfNZXdiZF69x44NvAdfSecO7WaWid89tOU1Lg2-SDcRKytVp61m5bNfo1UO0TIT911CDgDN_6LkdO4nqCbGJFSV8PhbCidDstDcPXrLxKMWOA3w493tKRByx_7t2vLRD3isd6q5xKdntNwNWOo72JujDpLifmovKCbaV2kamruB7p3wxRT6MuzNyyT1Gp5ZQvqvfy6Xifip7OC8ftQIlKL4eQEcecCQEzE7hSKCnmVmnW01j4_Wy0](./images/order.png)
 
 ### IV. See their position in the queue (and expected waiting time before collecting the coffee)!
@@ -85,10 +90,10 @@ We could make a table to store the expected waiting time for each item on the me
 
 And a table to store the current position of the particular user:
 
-id |               order_id               | position |               user_id                
----|--------------------------------------|----------|--------------------------------------
-51 | 48f2554c-ef29-4d46-a8bd-632eaf8ae03e |        5 | bda05e7d-65c5-4988-b0b3-d70f261227cb
-52 | 2051ac86-3ea9-45ae-8a2e-0b427d0ff14b |        6 | bda05e7d-65c5-4988-b0b3-d70f261227cb
+| id |               order_id               | position |               user_id                |
+|----|--------------------------------------|----------|--------------------------------------|
+| 51 | 48f2554c-ef29-4d46-a8bd-632eaf8ae03e |        5 | bda05e7d-65c5-4988-b0b3-d70f261227cb |
+| 52 | 2051ac86-3ea9-45ae-8a2e-0b427d0ff14b |        6 | bda05e7d-65c5-4988-b0b3-d70f261227cb |
 
 When someone check his/her position, we pull records from two table and orders before the current position of the user
 (for example, if user has position of 4, we pull order 1, 2, 3). Then we calculate the total waiting time and return them to the user 
