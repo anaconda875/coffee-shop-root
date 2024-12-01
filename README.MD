@@ -77,7 +77,7 @@ We can use `Redis List`, which is backed by `Redisson Queue` to store the orders
 
 In the scope of this assessment, I use `Option 2`. Basically, there is an `application.yml`
 in `org.example.coffee-shop` where I set the queue id(s). For now there are 2 queues.
-orders will be distributed fairly to the queues (detail [HERE](/coffee-shop/src/main/java/org/example/coffeeshop/service/DefaultOrderService.java)).
+orders will be distributed fairly (Round Robin) to the queues (detail [HERE](/coffee-shop/src/main/java/org/example/coffeeshop/service/DefaultOrderService.java)).
 ![https://plantuml.github.io/plantuml-core/raw.html?ZLB9JiCm4BtdAnuzWKGZiQC8LK8Wf4f854fllRZ9jF71Tl02uk-n7P9cwQ4NonwFtp9-9xOaGH1CcwHYslASLqnQh0pfNk796Qi4wSUgEbXVbgeQtdrGmVkm2sLscfRlhqd2Sik_cQMQAYoOpheq6IvIBDr6S8l9cov8JvA2-i_QKrTUPz-5_5UOuTB3aYmGCQ7fov6nNUWksAZO61sS3n5TfNZXdiZF69x44NvAdfSecO7WaWid89tOU1Lg2-SDcRKytVp61m5bNfo1UO0TIT911CDgDN_6LkdO4nqCbGJFSV8PhbCidDstDcPXrLxKMWOA3w493tKRByx_7t2vLRD3isd6q5xKdntNwNWOo72JujDpLifmovKCbaV2kamruB7p3wxRT6MuzNyyT1Gp5ZQvqvfy6Xifip7OC8ftQIlKL4eQEcecCQEzE7hSKCnmVmnW01j4_Wy0](./images/order.png)
 
 ### IV. See their position in the queue (and expected waiting time before collecting the coffee)!
